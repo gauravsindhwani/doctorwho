@@ -58,7 +58,7 @@ public abstract class AbstractDaoTest {
 	}
 	
 	public static void main(String[] args){
-		begin("createMedicalInfo");
+		begin("createCorp");
 	}
 
 	private static void begin(String testType) {

@@ -51,7 +51,7 @@ public class FirstTest {
 
 	private static Post getPost(long parentID) {
 		Post p = new Post(2L);
-		p.setQuery(new Query(1L));
+		p.setQuery(new Query());
 		p.setUser(new Doctor(1L));
 		p.setCreatedOnDate(new Date());
 		p.setUpdatedOnDate(new Date());
@@ -73,7 +73,7 @@ public class FirstTest {
 	}
 
 	private static Query getQuery(Doctor doc, Patient patient) {
-		Query q = new Query(1L);
+		Query q = new Query();
 		q.setCreatedOnDate(new Date());
 		q.setUpdatedOnDate(new Date());
 		q.setDoctor(doc);

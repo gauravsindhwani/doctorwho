@@ -17,8 +17,8 @@
 		<property name="dataSourceProperties">
 			<props>
 				<prop key="url">jdbc:mysql://localhost/econsult</prop>
-				<prop key="user">root</prop>
-				<prop key="password">root</prop>
+				<prop key="user">econsult</prop>
+				<prop key="password">econsult</prop>
 				<prop key="cachePrepStmts">true</prop>
 				<prop key="prepStmtCacheSize">250</prop>
 				<prop key="prepStmtCacheSqlLimit">2048</prop>
