@@ -36,7 +36,7 @@ public class FirstQuery {
 		post.setUpdatedOnDate(new Date());
 		post.setPostBy(Role.Roles.PATIENT.getRole());
 		query.addPost(post);
-		query.setUpdatedOnDate(new Date());
+	//	query.setUpdatedOnDate(new Date());
 		return query;
 	}
 

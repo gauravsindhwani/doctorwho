@@ -36,7 +36,8 @@ public class Role implements Serializable{
 	}
 	
 	public static enum Roles{
-		DOCTOR("DOCTOR"), PATIENT("PATIENT");
+		DOCTOR("DOCTOR"), PATIENT("PATIENT"), ADMIN("ADMIN");
+		
 		Role role;
 		
 		private Roles(String name){

@@ -1,13 +1,17 @@
 package com.econsult.dao;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.econsult.model.DefaultUser;
 import com.econsult.model.Doctor;
+import com.econsult.model.MedicalInfo;
 import com.econsult.model.Patient;
 import com.econsult.model.User;
 
 @Repository
+@Transactional
 public class UserDao extends AbstractDao {
 
 	/**
@@ -15,7 +19,7 @@ public class UserDao extends AbstractDao {
 	 * @return
 	 */
 	public Doctor getDoctor(long Id){
-		return (Doctor)session.get(Doctor.class, Id);
+		return entitymanager.find(Doctor.class, Id);
 	}
 
 	/**
@@ -23,7 +27,7 @@ public class UserDao extends AbstractDao {
 	 * @return
 	 */
 	public Patient getPatient(long Id){
-		return (Patient)session.get(Patient.class, Id);
+		return entitymanager.find(Patient.class, Id);
 	}
 
 	/**
@@ -31,20 +35,21 @@ public class UserDao extends AbstractDao {
 	 * @return
 	 */
 	public User getUser(long Id){
-		return (User)session.get(DefaultUser.class, Id);
+		return entitymanager.find(DefaultUser.class, Id);
 	}
 
-	public long saveDoctor(Doctor doctor){
-		session.beginTransaction();
-		long id = (Long)session.save(doctor);
-		session.getTransaction().commit();
-		return id;
+	public Doctor saveDoctor(Doctor doctor){
+		entitymanager.persist(doctor);
+		return doctor;
 	}
 
-	public long savePatient(Patient patient){
-		session.beginTransaction();
-		long id = (Long)session.save(patient);
-		session.getTransaction().commit();
-		return id;
+	public Patient savePatient(Patient patient){
+		entitymanager.persist(patient);
+		return patient;
+	}
+	
+	public MedicalInfo saveMedicalInfo(MedicalInfo medicalInfo){
+		entitymanager.persist(medicalInfo);
+		return medicalInfo;
 	}
 }

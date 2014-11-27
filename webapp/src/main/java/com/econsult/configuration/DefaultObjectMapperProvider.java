@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 @Provider
@@ -38,6 +39,7 @@ ContextResolver<ObjectMapper> {
 		final ObjectMapper result = new ObjectMapper();
 		result.enable(SerializationFeature.INDENT_OUTPUT);
 		result.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		result.registerModule(new Hibernate4Module());
 		return result;
 	}
 

@@ -1,4 +1,4 @@
-package com.econsult.hibernate;
+package com.econsult.dao;
 
 import java.sql.Timestamp;
 import java.util.Date;

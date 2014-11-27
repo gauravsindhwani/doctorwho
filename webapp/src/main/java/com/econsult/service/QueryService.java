@@ -38,14 +38,14 @@ public class QueryService {
 	@POST
 	@Path("/query/")
 	public long createQuery(FirstQuery lightQuery){
-		return dao.saveQuery(lightQuery.buildQuery());
+		return dao.saveQuery(lightQuery.buildQuery()).getId();
 	}
 	
 	@POST
 	@Path("/post/")
 	public long createPost(Post post){
 		post.setUpdatedOnDate(new Date());
-		return dao.savePost(post);
+		return dao.savePost(post).getPostId();
 	}
 	
 }

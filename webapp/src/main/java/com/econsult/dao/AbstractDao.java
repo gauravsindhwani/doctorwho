@@ -1,28 +1,20 @@
 package com.econsult.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class AbstractDao {
 
+	@PersistenceContext
+	protected EntityManager entitymanager;
 
-	protected SessionFactory sessionFactory;
 
-	protected Session session;
-
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-		session = sessionFactory.openSession();
+	public void setEntitymanager(EntityManager entitymanager) {
+		this.entitymanager = entitymanager;
 	}
 
-	
-
-	protected Session getSession(){
-		return sessionFactory.openSession();
-	}
 
 }

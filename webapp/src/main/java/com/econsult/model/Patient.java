@@ -3,22 +3,16 @@ package com.econsult.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PATIENT")
-@AttributeOverrides({
-    @AttributeOverride(name="USER_ID", column=@Column(name="PATIENT_ID"))
-})
 public class Patient extends DefaultUser {
 
 	/**
@@ -34,18 +28,54 @@ public class Patient extends DefaultUser {
 	public Patient() {
 		super();
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
+	Set<Post> posts = new HashSet<>();
+	
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PATIENT_ID")
+	Set<Query> queries = new HashSet<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "ACCOUNT_ID")
+	Account account;
+	
+	@OneToOne(mappedBy = "patient")
+	MedicalInfo medicalInfo;
 
-	
-	@ManyToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
-	@JoinTable(name="PATIENT_ALLERGY",
-		joinColumns={@JoinColumn(name="PATIENT_ID")},
-		inverseJoinColumns={@JoinColumn(name="ALLERGY")})
-	
-	Set<Allergy> allergies = new HashSet<>();
-	
-	public void setPatientId(long id){
-		this.id = id;
+
+	public Set<Post> getPosts() {
+		return posts;
 	}
-	
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
+	}
+
+	public Set<Query> getQueries() {
+		return queries;
+	}
+
+	public void setQueries(Set<Query> queries) {
+		this.queries = queries;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public MedicalInfo getMedicalInfo() {
+		return medicalInfo;
+	}
+
+	public void setMedicalInfo(MedicalInfo medicalInfo) {
+		this.medicalInfo = medicalInfo;
+	}
 
 }

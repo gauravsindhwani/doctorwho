@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface User extends Audtiable, Serializable{
 
-	Long getId();
+	long getId();
 	String getFirstName();
 	String getLastName();
 	String getPassword();

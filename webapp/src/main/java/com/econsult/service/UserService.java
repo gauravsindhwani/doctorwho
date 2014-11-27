@@ -37,7 +37,7 @@ public class UserService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public long saveDoctor(Doctor doctor){
 		doctor.setUpdatedOnDate(new Date());
-		return userDao.saveDoctor(doctor);
+		return userDao.saveDoctor(doctor).getId();
 	}
 	
 	
@@ -47,6 +47,6 @@ public class UserService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public long savePatient(Patient patient){
 		patient.setUpdatedOnDate(new Date());
-		return userDao.savePatient(patient);
+		return userDao.savePatient(patient).getId();
 	}
 }

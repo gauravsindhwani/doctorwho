@@ -3,25 +3,18 @@ package com.econsult.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @Table(name="DOCTOR")
-@AttributeOverrides({
-    @AttributeOverride(name="USER_ID", column=@Column(name="DOCTOR_ID"))
-})
-@XmlRootElement
 public class Doctor extends DefaultUser {
 	
 	/**
@@ -38,7 +31,14 @@ public class Doctor extends DefaultUser {
 		super(id);
 	}
 
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
+	Set<Post> posts = new HashSet<>();
 	
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DOCTOR_ID")
+	Set<Query> queries = new HashSet<>();
 
 	@ManyToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
 	@JoinTable(name="DOCTOR_SPECIALITY",
