@@ -3,7 +3,7 @@
 ## Database setup
 
 1. Install Mysql
-2. DDL script location <projectlocation>/econsult/DataModel/DataModel-V1.sql
+2. DDL script location <projectlocation>/econsult/DataModel/econsultModel.sql
 
 ## Project setup
 
@@ -16,12 +16,58 @@
 
 ## Api 
 
-### Create Doctor
-* Service end point: ** http://localhost:8080/econsult/u/doctor/ **
-* content-type: ** Content-Type: application/json **
-* HTTP Method: ** POST **
+### Create Service plan
+
+* Service end point:**http://localhost:8080/econsult/admin/plan**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
 * Payload 
-...
+```
+
+{
+"name": "BASIC-YEARLY",
+"duration": "YEARLY",
+"numberOfDependents": "4",
+"fee": "1000"
+}
+```
+
+### Create Corporation
+
+* Service end point:**http://localhost:8080/econsult/admin/corp/**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
+* Payload 
+```
+{
+"name": "AbcCorp",
+"email": "con106@abc.com",
+"primaryPhone": "0274239784",
+"domain": "abc.com"
+}
+
+```
+
+### Create account
+
+* Service end point:**http://localhost:8080/econsult/admin/account/**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
+* Payload 
+```
+{
+"corpEmail":"gaurav@abc.com"
+}
+
+```
+
+#Following Api's are not tested in latest version
+### Create Doctor
+* Service end point:**http://localhost:8080/econsult/u/doctor/**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
+* Payload 
+```
 
 {
 "firstName": "Doc",
@@ -31,15 +77,15 @@
 "roleName": "DOCTOR"
 }
 
-...
+```
 
 
 ### Create Patient
-* Service end point: ** http://localhost:8080/econsult/u/patient/ **
-* content-type: ** Content-Type: application/json **
-* HTTP Method: ** POST **
+* Service end point:**http://localhost:8080/econsult/u/patient/**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
 * Payload 
-...
+```
 
 {
 "firstName": "Pat",
@@ -49,15 +95,15 @@
 "roleName": "PATIENT"
 }
 
-...
+```
 
 
 ### Create Query
-* Service end point: ** http://localhost:8080/econsult/q/query/ **
-* content-type: ** Content-Type: application/json **
-* HTTP Method: ** POST **
+* Service end point:**http://localhost:8080/econsult/q/query/**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
 * Payload 
-...
+```
 
 {
 text:"hi doc wassup",
@@ -66,14 +112,14 @@ patient{
 }
 }
 
-...
+```
 
 ### Create Post
-* Service end point: ** http://localhost:8080/econsult/q/post/ **
-* content-type: ** Content-Type: application/json **
-* HTTP Method: ** POST **
+* Service end point:**http://localhost:8080/econsult/q/post/**
+* content-type:**Content-Type: application/json**
+* HTTP Method: **POST **
 * Payload 
-...
+```
 
 {
 "text": "I am good",
@@ -93,8 +139,8 @@ patient{
 }
 }
 
-...
+```
 
 ### Get Query
-* Service end point: ** http://localhost:8080/econsult/q/query/<id> **
-* HTTP Method: ** GET **
+* Service end point: **http://localhost:8080/econsult/q/query/<id> **
+* HTTP Method: **GET**
