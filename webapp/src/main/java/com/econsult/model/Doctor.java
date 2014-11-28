@@ -25,10 +25,12 @@ public class Doctor extends DefaultUser {
 
 	public Doctor() {
 		super();
+		setRole(Role.Roles.DOCTOR.role);
 	}
 	
 	public Doctor(Long id) {
 		super(id);
+		setRole(Role.Roles.DOCTOR.role);
 	}
 
 	@OneToMany(fetch = FetchType.LAZY)

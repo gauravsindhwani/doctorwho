@@ -9,11 +9,18 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "CONTACT_INFO")
 @AttributeOverride(name = "id", column = @Column(name = "CONTACT_ID"))
 public class ContactInfo extends AbstractAuditableAutoIncrementingEntity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="EMAIL")
 	private String  email;
 	
@@ -53,7 +60,8 @@ public class ContactInfo extends AbstractAuditableAutoIncrementingEntity{
 	public void setSecondaryPhone(String secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
 	}
-
+	
+	@JsonIgnore
 	public long getContactId() {
 		return id;
 	}

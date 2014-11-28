@@ -47,9 +47,19 @@ public class UserDao extends AbstractDao {
 		entitymanager.persist(patient);
 		return patient;
 	}
-	
+
 	public MedicalInfo saveMedicalInfo(MedicalInfo medicalInfo){
 		entitymanager.persist(medicalInfo);
 		return medicalInfo;
 	}
+
+	public MedicalInfo updatedMedicalInfo(MedicalInfo medicalInfo){
+		entitymanager.merge(medicalInfo);
+		return medicalInfo;
+	}
+
+	public MedicalInfo getMedicalInfo(long id){
+		return entitymanager.find(MedicalInfo.class, id);
+	}
+
 }

@@ -11,8 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "PATIENT")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Patient extends DefaultUser {
 
 	/**
@@ -23,10 +27,12 @@ public class Patient extends DefaultUser {
 
 	public Patient(Long id) {
 		super(id);
+		setRole(Role.Roles.PATIENT.role);
 	}
 	
 	public Patient() {
 		super();
+		setRole(Role.Roles.PATIENT.role);
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY)
@@ -38,7 +44,7 @@ public class Patient extends DefaultUser {
 	@JoinColumn(name = "PATIENT_ID")
 	Set<Query> queries = new HashSet<>();
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ID")
 	Account account;
 	

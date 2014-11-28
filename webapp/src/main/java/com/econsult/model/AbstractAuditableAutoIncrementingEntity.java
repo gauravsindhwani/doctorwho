@@ -13,6 +13,11 @@ import javax.persistence.TemporalType;
 @MappedSuperclass
 public abstract class AbstractAuditableAutoIncrementingEntity extends AbstractAutoIncrementingEntity implements Audtiable, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public AbstractAuditableAutoIncrementingEntity(long id) {
 		super(id);
 	}
@@ -21,10 +26,7 @@ public abstract class AbstractAuditableAutoIncrementingEntity extends AbstractAu
 		super();
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATED_ON_DATE", insertable = false)
-	Date createdOnDate;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATED_ON_DATE")
 	Date updatedOnDate;
@@ -35,17 +37,8 @@ public abstract class AbstractAuditableAutoIncrementingEntity extends AbstractAu
 		this.updatedOnDate = new Date();
 	}
 	
-	public void setCreatedOnDate(Date createdOnDate) {
-		this.createdOnDate = createdOnDate;
-	}
-
 	public void setUpdatedOnDate(Date updatedOnDate) {
 		this.updatedOnDate = updatedOnDate;
-	}
-
-	@Override
-	public Date getCreatedOnDate() {
-		return createdOnDate;
 	}
 
 	@Override

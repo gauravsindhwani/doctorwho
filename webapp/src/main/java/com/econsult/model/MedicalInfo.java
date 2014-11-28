@@ -3,7 +3,6 @@ package com.econsult.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,10 +10,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "MEDICAL_INFORMATION")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="patient")
 public class MedicalInfo extends AbstractAuditableEntity implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@OneToOne
 	@JoinColumn(name = "USER_ID")

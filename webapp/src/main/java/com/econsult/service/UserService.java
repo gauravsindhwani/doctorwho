@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -13,8 +14,10 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.econsult.dao.AdministrationDao;
 import com.econsult.dao.UserDao;
 import com.econsult.model.Doctor;
+import com.econsult.model.MedicalInfo;
 import com.econsult.model.Patient;
 
 @Component
@@ -24,11 +27,21 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private AdministrationDao adminDao;
+	
 	@GET
-	@Path("/doctor/{Id}")
+	@Path("/doctor/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Doctor getDoctor(@PathParam("Id") long Id){
-		return userDao.getDoctor(Id);
+	public Doctor getDoctor(@PathParam("id") long id){
+		return userDao.getDoctor(id);
+	}
+	
+	@GET
+	@Path("/patient/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Patient getPatient(@PathParam("id") long id){
+		return userDao.getPatient(id);
 	}
 	
 	@POST
@@ -48,5 +61,31 @@ public class UserService {
 	public long savePatient(Patient patient){
 		patient.setUpdatedOnDate(new Date());
 		return userDao.savePatient(patient).getId();
+	}
+	
+	
+	
+	@POST
+	@Path("/medicalinfo/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean saveMedicalInfo(MedicalInfo medicalInfo){
+		userDao.saveMedicalInfo(medicalInfo);
+		return true;
+	}
+	
+	@PUT
+	@Path("/medicalinfo/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean updateMedicalInfo(MedicalInfo medicalInfo){
+		userDao.updatedMedicalInfo(medicalInfo);
+		return true;
+	}
+	
+	
+	@GET
+	@Path("/medicalinfo/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public MedicalInfo getMedicalInfo(@PathParam("id") long id){
+		return userDao.getMedicalInfo(id);
 	}
 }

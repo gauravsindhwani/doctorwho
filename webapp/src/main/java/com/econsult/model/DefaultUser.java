@@ -6,6 +6,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -44,7 +45,7 @@ public class DefaultUser extends AbstractAuditableAutoIncrementingEntity impleme
 	@JoinColumn(name = "ROLE_NAME")
 	Role role;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "CONTACT_ID")
 	ContactInfo contactInfo;
 	
@@ -61,9 +62,6 @@ public class DefaultUser extends AbstractAuditableAutoIncrementingEntity impleme
 		this.password = password;
 	}
 
-	public void setCreatedOnDate(Date createdOnDate) {
-		this.createdOnDate = createdOnDate;
-	}
 
 	public void setUpdatedOnDate(Date updatedOnDate) {
 		this.updatedOnDate = updatedOnDate;
