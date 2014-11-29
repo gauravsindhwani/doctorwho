@@ -1,6 +1,6 @@
 package com.econsult.model.lightweight;
 
-public class FirstUser {
+public class LWFirstUser {
 	String corpEmail;
 
 	public String getCorpEmail() {

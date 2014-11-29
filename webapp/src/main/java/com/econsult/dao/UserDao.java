@@ -27,7 +27,8 @@ public class UserDao extends AbstractDao {
 	 * @return
 	 */
 	public Patient getPatient(long Id){
-		return entitymanager.find(Patient.class, Id);
+		Patient p = entitymanager.find(Patient.class, Id);
+		return p;
 	}
 
 	/**
@@ -47,6 +48,12 @@ public class UserDao extends AbstractDao {
 		entitymanager.persist(patient);
 		return patient;
 	}
+	
+	public Patient updatePatient(Patient patient){
+		entitymanager.merge(patient);
+		return patient;
+	}
+
 
 	public MedicalInfo saveMedicalInfo(MedicalInfo medicalInfo){
 		entitymanager.persist(medicalInfo);

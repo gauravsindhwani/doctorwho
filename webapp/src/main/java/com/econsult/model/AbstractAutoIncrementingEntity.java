@@ -1,5 +1,7 @@
 package com.econsult.model;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +22,14 @@ public abstract class AbstractAutoIncrementingEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")
+	@Access(AccessType.PROPERTY)
 	long id;
 
 	public long getId() {
 		return id;
 	}
-	
-	
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

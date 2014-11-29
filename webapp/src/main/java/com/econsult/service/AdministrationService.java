@@ -20,8 +20,8 @@ import com.econsult.model.CorpAccount;
 import com.econsult.model.Corporation;
 import com.econsult.model.Patient;
 import com.econsult.model.ServicePlan;
-import com.econsult.model.lightweight.FirstUser;
-import com.econsult.model.lightweight.InFlightCorporation;
+import com.econsult.model.lightweight.LWFirstUser;
+import com.econsult.model.lightweight.LWCorporation;
 
 @Component
 @Path("econsult/admin/")
@@ -65,14 +65,14 @@ public class AdministrationService {
 	
 	@POST
 	@Path("/corp/")
-	public long createCorporation(InFlightCorporation inflighCorp){
+	public long createCorporation(LWCorporation inflighCorp){
 		return adminDao.saveCorporation(inflighCorp.buildCorporation()).getCorpId();
 	}
 	
 	@POST
 	@Path("/account/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean registerNewUserFromCorpMail(FirstUser user){
+	public boolean registerNewUserFromCorpMail(LWFirstUser user){
 		// create a patient
 		Patient patient = new Patient();
 		ContactInfo contact = new ContactInfo();

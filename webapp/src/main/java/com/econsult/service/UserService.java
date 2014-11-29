@@ -1,7 +1,5 @@
 package com.econsult.service;
 
-import java.util.Date;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -49,7 +47,6 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public long saveDoctor(Doctor doctor){
-		doctor.setUpdatedOnDate(new Date());
 		return userDao.saveDoctor(doctor).getId();
 	}
 	
@@ -57,11 +54,17 @@ public class UserService {
 	@POST
 	@Path("/patient/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
 	public long savePatient(Patient patient){
-		patient.setUpdatedOnDate(new Date());
 		return userDao.savePatient(patient).getId();
 	}
+	
+	@PUT
+	@Path("/patient/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public long updatePatient(Patient patient){
+		return userDao.savePatient(patient).getId();
+	}
+	
 	
 	
 	

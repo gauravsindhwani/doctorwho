@@ -1,9 +1,8 @@
 package com.econsult.dao;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.econsult.model.MedicalInfo;
-import com.econsult.model.Patient;
 
 public class UserDaoTest extends AbstractDaoTest {
 
@@ -13,9 +12,9 @@ public class UserDaoTest extends AbstractDaoTest {
 
 	private MedicalInfo getMedicalInfo() {
 		MedicalInfo info = new MedicalInfo();
-		info.setPatient(new Patient(23L));
+		info.setPatientId(23L);
 		info.setAllergies("sulphur");
-		info.setDob(new Date());
+		info.setDob(LocalDate.now());
 		info.setWeight((short)80);
 		info.setGender("MALE");
 		return info;

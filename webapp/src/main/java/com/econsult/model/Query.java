@@ -21,6 +21,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Query extends AbstractAuditableAutoIncrementingEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DOCTOR_ID")
 	Doctor doctor;

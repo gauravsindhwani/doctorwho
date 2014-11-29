@@ -61,6 +61,96 @@
 
 ```
 
+### Create patient
+
+* Service end point:**http://localhost:8080/econsult/u/patient/**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
+* Payload 
+```
+{
+  "firstName" : "sangeet",
+  "contactInfo" : {
+    "email" : "sang@gmail.com"
+  },
+  "accountId": 1,
+ 
+  "medicalInfo" : {
+    "gender" : "FEMALE",
+    "weight" : 100,
+    "allergies" : "sulphur",
+    "dobToDisplay" : "2013-02-11"
+  }
+}
+
+```
+### update patient
+
+* Service end point:**http://localhost:8080/econsult/u/patient/{id}**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**PUT**
+* Payload 
+```
+{
+  "firstName" : "sangeet",
+  "contactInfo" : {
+    "email" : "sang@gmail.com"
+  },
+  "accountId": 1,
+ 
+  "medicalInfo" : {
+    "gender" : "FEMALE",
+    "weight" : 100,
+    "allergies" : "sulphur",
+    "dobToDisplay" : "2013-02-11"
+  }
+}
+
+```
+
+### create medical info
+
+Medical info can be created as part of creating a patient, or it can be created seperately using this api.
+
+* Service end point:**http://localhost:8080/econsult/u/medicalinfo**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**POST**
+* Payload 
+```
+{
+patientId: 11
+updatedOnDate: 1417260963000
+gender: "FEMALE"
+weight: 100
+allergies: "sulphur"
+dobToDisplay: "2013-02-11"
+}
+
+```
+
+### get medical info
+
+* Service end point:**http://localhost:8080/econsult/u/medicalinfo/{id}**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**GET**
+
+### update medical info
+
+* Service end point:**http://localhost:8080/econsult/u/medicalinfo/{id}**
+* content-type:**Content-Type: application/json**
+* HTTP Method:**PUT**
+* Payload 
+```
+{
+patientId: 11
+updatedOnDate: 1417260963000
+gender: "FEMALE"
+weight: 100
+allergies: "sulphur"
+dobToDisplay: "2013-02-11"
+}
+
+```
 #Following Api's are not tested in latest version
 ### Create Doctor
 * Service end point:**http://localhost:8080/econsult/u/doctor/**

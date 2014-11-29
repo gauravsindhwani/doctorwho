@@ -7,7 +7,7 @@ import com.econsult.model.Post;
 import com.econsult.model.Query;
 import com.econsult.model.Role;
 
-public class FirstQuery {
+public class LWFirstQuery {
 	
 	Patient patient;
 	String text;

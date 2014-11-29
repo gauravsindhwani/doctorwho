@@ -3,7 +3,7 @@ package com.econsult.model.lightweight;
 import com.econsult.model.ContactInfo;
 import com.econsult.model.Corporation;
 
-public class InFlightCorporation {
+public class LWCorporation {
 	String name;
 	String email;
 	String primaryPhone;

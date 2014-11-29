@@ -41,11 +41,11 @@ public class DefaultUser extends AbstractAuditableAutoIncrementingEntity impleme
 	@Column(name="LOGIN_TYPE")
 	String loginType;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ROLE_NAME")
 	Role role;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "CONTACT_ID")
 	ContactInfo contactInfo;
 	

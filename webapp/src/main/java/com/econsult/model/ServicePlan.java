@@ -10,6 +10,11 @@ import javax.persistence.Table;
 @AttributeOverride(name = "id", column = @Column(name = "SERVICE_PLAN_ID"))
 public class ServicePlan extends AbstractAuditableAutoIncrementingEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ServicePlan(long id) {
 		super(id);
 	}

@@ -3,6 +3,7 @@ package com.econsult.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -46,9 +48,11 @@ public class Patient extends DefaultUser {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ID")
+	@JsonProperty(value= "accountId")
 	Account account;
 	
-	@OneToOne(mappedBy = "patient")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
 	MedicalInfo medicalInfo;
 
 
@@ -68,6 +72,11 @@ public class Patient extends DefaultUser {
 		this.queries = queries;
 	}
 
+	@JsonProperty
+	public long getAccountId(){
+		return account.getId();
+	}
+
 	public Account getAccount() {
 		return account;
 	}
@@ -81,6 +90,7 @@ public class Patient extends DefaultUser {
 	}
 
 	public void setMedicalInfo(MedicalInfo medicalInfo) {
+		medicalInfo.patient = this;
 		this.medicalInfo = medicalInfo;
 	}
 

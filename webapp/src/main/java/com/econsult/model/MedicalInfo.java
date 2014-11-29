@@ -1,21 +1,29 @@
 package com.econsult.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.econsult.persistence.LocalDatePersistenceConverter;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "MEDICAL_INFORMATION")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="patient")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="patientId")
 public class MedicalInfo extends AbstractAuditableEntity implements Serializable{
 	
 	/**
@@ -24,8 +32,13 @@ public class MedicalInfo extends AbstractAuditableEntity implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@OneToOne
+	@Column(name = "USER_ID")
+	long patientId;
+
+	@MapsId
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
+	@JsonIgnore
 	Patient patient;
 	
 	@Column(name = "GENDER")
@@ -38,15 +51,11 @@ public class MedicalInfo extends AbstractAuditableEntity implements Serializable
 	String allergies;
 	
 	@Column(name = "DOB")
-	Date dob;
+	@Convert(converter = LocalDatePersistenceConverter.class)
+	@JsonProperty(value = "dobToDisplay")
+	LocalDate dob;
 
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+	
 
 	public String getGender() {
 		return gender;
@@ -72,13 +81,31 @@ public class MedicalInfo extends AbstractAuditableEntity implements Serializable
 		this.allergies = allergies;
 	}
 
-	public Date getDob() {
+	
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 	
+	@JsonProperty
+	public void setDobToDisplay(String dob) throws ParseException {
+		this.dob = LocalDate.parse(dob, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	
+	@JsonProperty
+	public String getDobToDisplay(){
+		return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(dob);
+	}
+	
+	public long getPatientId(){
+		return patientId;
+	}
+
+	public void setPatientId(long patientId) {
+		this.patientId = patientId;
+	}
 	
 }

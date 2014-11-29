@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import com.econsult.dao.QueryDao;
 import com.econsult.model.Post;
 import com.econsult.model.Query;
-import com.econsult.model.lightweight.FirstQuery;
+import com.econsult.model.lightweight.LWFirstQuery;
 
 @Component
 @Path("econsult/q/")
@@ -37,7 +37,7 @@ public class QueryService {
 	
 	@POST
 	@Path("/query/")
-	public long createQuery(FirstQuery lightQuery){
+	public long createQuery(LWFirstQuery lightQuery){
 		return dao.saveQuery(lightQuery.buildQuery()).getId();
 	}
 	
