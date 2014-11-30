@@ -13,8 +13,8 @@ import com.econsult.util.EntityManagerUtil;
 
 public abstract class AbstractDaoTest {
 
-	AdministrationDao adminDao = new AdministrationDao();
-	UserDao userDao = new UserDao();
+	AdministrationDaoImpl adminDao = new AdministrationDaoImpl();
+	UserDaoImpl userDao = new UserDaoImpl();
 	static EntityManager em = EntityManagerUtil.entityManager;
 	public AbstractDaoTest(){
 		adminDao.entitymanager = em;

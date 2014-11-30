@@ -133,6 +133,17 @@
 			<artifactId>HikariCP-java6</artifactId>
 			<version>2.2.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.genericdao</groupId>
+			<artifactId>dao</artifactId>
+			<version>${genericdao.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.genericdao</groupId>
+			<artifactId>search-jpa-hibernate</artifactId>
+			<version>${genericdao.version}</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

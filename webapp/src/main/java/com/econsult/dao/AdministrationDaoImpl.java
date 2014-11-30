@@ -16,30 +16,44 @@ import com.econsult.model.ServicePlan_;
 
 @Repository
 @Transactional
-public class AdministrationDao extends AbstractDao{
+public class AdministrationDaoImpl extends AbstractDao implements AdminitrationDao{
 
+
+	@Override
 	public Corporation saveCorporation(Corporation corp){
-		entitymanager.persist(corp);
-		return corp;
+		return save(corp);
 	}
 	
+	
+	 
+	@Override
 	public Corporation getCorporation(long id){
-		return entitymanager.find(Corporation.class, id);
+			return find(Corporation.class, id);
 	}
 	
+	
+	@Override
 	public Account getAccount(long id){
-		return entitymanager.find(Account.class, id);
+		return find(Account.class, id);
 	}
 	
+	
+	 
+	@Override
 	public ServicePlan saveServicePlan(ServicePlan servicePlan){
-		entitymanager.persist(servicePlan);
-		return servicePlan;
+		return save(servicePlan);
 	}
 	
+	
+	 
+	@Override
 	public ServicePlan getServicePlan(long id){
-		return entitymanager.find(ServicePlan.class, id);
+		return find(ServicePlan.class, id);
 	}
 	
+	
+	 
+	@Override
 	public ServicePlan getServicePlanByName(String name){
 		CriteriaBuilder cb = entitymanager.getCriteriaBuilder();
 		CriteriaQuery<ServicePlan> cq = cb.createQuery(ServicePlan.class);
@@ -48,6 +62,9 @@ public class AdministrationDao extends AbstractDao{
 		return entitymanager.createQuery(cq).getSingleResult();
 	}
 	
+	
+	 
+	@Override
 	public Corporation getCorpByDomain(String domain){
 		CriteriaBuilder cb = entitymanager.getCriteriaBuilder();
 		CriteriaQuery<Corporation> cq = cb.createQuery(Corporation.class);
@@ -56,6 +73,10 @@ public class AdministrationDao extends AbstractDao{
 		return entitymanager.createQuery(cq).getSingleResult();
 	}
 	
+	
+	 
+	 
+	@Override
 	public Corporation getCorpAndServiceplanByDomain(String domain){
 		CriteriaBuilder cb = entitymanager.getCriteriaBuilder();
 		CriteriaQuery<Corporation> cq = cb.createQuery(Corporation.class);
@@ -64,11 +85,17 @@ public class AdministrationDao extends AbstractDao{
 		return entitymanager.createQuery(cq).getSingleResult();
 	}
 	
+	 
+	@Override
 	public Account saveAccount(Account account){
 		entitymanager.persist(account);
 		return account;
 	}
 	
+	
+	 
+	 
+	@Override
 	public CorpAccount saveCorpAccount(CorpAccount corpAccount){
 		entitymanager.persist(corpAccount);
 		return corpAccount;

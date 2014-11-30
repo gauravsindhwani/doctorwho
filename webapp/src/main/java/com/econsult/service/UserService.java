@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.econsult.dao.AdministrationDao;
+import com.econsult.dao.AdminitrationDao;
 import com.econsult.dao.UserDao;
 import com.econsult.model.Doctor;
 import com.econsult.model.MedicalInfo;
@@ -26,7 +26,7 @@ public class UserService {
 	private UserDao userDao;
 	
 	@Autowired
-	private AdministrationDao adminDao;
+	private AdminitrationDao adminDao;
 	
 	@GET
 	@Path("/doctor/{id}")

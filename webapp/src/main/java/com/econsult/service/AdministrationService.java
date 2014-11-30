@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.econsult.dao.AdministrationDao;
+import com.econsult.dao.AdminitrationDao;
 import com.econsult.model.Account;
 import com.econsult.model.ContactInfo;
 import com.econsult.model.CorpAccount;
@@ -30,7 +30,7 @@ public class AdministrationService {
 	private final static Logger logger = LoggerFactory.getLogger(AdministrationService.class); 
 
 	@Autowired
-	private AdministrationDao adminDao;
+	private AdminitrationDao adminDao;
 	
 	@GET
 	@Path("/corp/{Id}")

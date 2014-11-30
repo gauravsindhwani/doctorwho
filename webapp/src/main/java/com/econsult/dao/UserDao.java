@@ -1,72 +1,40 @@
 package com.econsult.dao;
 
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Repository;
-
-import com.econsult.model.DefaultUser;
 import com.econsult.model.Doctor;
 import com.econsult.model.MedicalInfo;
 import com.econsult.model.Patient;
 import com.econsult.model.User;
 
-@Repository
-@Transactional
-public class UserDao extends AbstractDao {
+public interface UserDao {
 
 	/**
 	 * @param Id
 	 * @return
 	 */
-	public Doctor getDoctor(long Id){
-		return entitymanager.find(Doctor.class, Id);
-	}
+	public abstract Doctor getDoctor(long Id);
 
 	/**
 	 * @param Id
 	 * @return
 	 */
-	public Patient getPatient(long Id){
-		Patient p = entitymanager.find(Patient.class, Id);
-		return p;
-	}
+	public abstract Patient getPatient(long Id);
 
 	/**
 	 * @param Id
 	 * @return
 	 */
-	public User getUser(long Id){
-		return entitymanager.find(DefaultUser.class, Id);
-	}
+	public abstract User getUser(long Id);
 
-	public Doctor saveDoctor(Doctor doctor){
-		entitymanager.persist(doctor);
-		return doctor;
-	}
+	public abstract Doctor saveDoctor(Doctor doctor);
 
-	public Patient savePatient(Patient patient){
-		entitymanager.persist(patient);
-		return patient;
-	}
-	
-	public Patient updatePatient(Patient patient){
-		entitymanager.merge(patient);
-		return patient;
-	}
+	public abstract Patient savePatient(Patient patient);
 
+	public abstract Patient updatePatient(Patient patient);
 
-	public MedicalInfo saveMedicalInfo(MedicalInfo medicalInfo){
-		entitymanager.persist(medicalInfo);
-		return medicalInfo;
-	}
+	public abstract MedicalInfo saveMedicalInfo(MedicalInfo medicalInfo);
 
-	public MedicalInfo updatedMedicalInfo(MedicalInfo medicalInfo){
-		entitymanager.merge(medicalInfo);
-		return medicalInfo;
-	}
+	public abstract MedicalInfo updatedMedicalInfo(MedicalInfo medicalInfo);
 
-	public MedicalInfo getMedicalInfo(long id){
-		return entitymanager.find(MedicalInfo.class, id);
-	}
+	public abstract MedicalInfo getMedicalInfo(long id);
 
 }
