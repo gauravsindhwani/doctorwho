@@ -12,32 +12,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.econsult.dao.AdminitrationDao;
+import com.econsult.dao.AdministrationDao;
 import com.econsult.model.Account;
 import com.econsult.model.ContactInfo;
 import com.econsult.model.CorpAccount;
 import com.econsult.model.Corporation;
 import com.econsult.model.Patient;
 import com.econsult.model.ServicePlan;
-import com.econsult.model.lightweight.LWFirstUser;
 import com.econsult.model.lightweight.LWCorporation;
+import com.econsult.model.lightweight.LWFirstUser;
+import com.googlecode.genericdao.dao.jpa.GeneralDAO;
 
 @Component
 @Path("econsult/admin/")
+@Transactional
 public class AdministrationService {
 	
 	private final static Logger logger = LoggerFactory.getLogger(AdministrationService.class); 
 
 	@Autowired
-	private AdminitrationDao adminDao;
+	private AdministrationDao adminDao;
+	
+	@Autowired
+	private GeneralDAO generalDao;
 	
 	@GET
 	@Path("/corp/{Id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Corporation getCorporation(@PathParam("Id") long id){
 		logger.trace("Getting corporation for ID {}", id);
-		return adminDao.getCorporation(id);
+		return generalDao.find(Corporation.class, id);
 	}
 	
 	
@@ -46,7 +52,7 @@ public class AdministrationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Account getAccount(@PathParam("Id") long id){
 		logger.trace("Getting account for ID {}", id);
-		return adminDao.getAccount(id);
+		return generalDao.find(Account.class, id);
 	}
 	
 	@GET
@@ -54,19 +60,19 @@ public class AdministrationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ServicePlan getServicePlan(@PathParam("Id") long id){
 		logger.trace("Getting service for ID {}", id);
-		return adminDao.getServicePlan(id);
+		return generalDao.find(ServicePlan.class, id);
 	}
 	
 	@POST
 	@Path("/plan/")
 	public long createServicePlan(ServicePlan plan){
-		return adminDao.saveServicePlan(plan).getId();
+		return generalDao.save(plan).getId();
 	}
 	
 	@POST
 	@Path("/corp/")
 	public long createCorporation(LWCorporation inflighCorp){
-		return adminDao.saveCorporation(inflighCorp.buildCorporation()).getCorpId();
+		return generalDao.save(inflighCorp.buildCorporation()).getCorpId();
 	}
 	
 	@POST
@@ -96,7 +102,7 @@ public class AdministrationService {
 		corpAccount.setAccount(account);
 		corpAccount.setCorporation(corporation);
 		account.setCorpAccount(corpAccount);
-		adminDao.saveAccount(account);
+		generalDao.save(account);
 		return true;
 	}
 	

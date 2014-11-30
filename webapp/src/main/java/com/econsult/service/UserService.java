@@ -11,35 +11,33 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.econsult.dao.AdminitrationDao;
-import com.econsult.dao.UserDao;
 import com.econsult.model.Doctor;
 import com.econsult.model.MedicalInfo;
 import com.econsult.model.Patient;
+import com.googlecode.genericdao.dao.jpa.GeneralDAO;
 
 @Component
 @Path("/econsult/u/")
+@Transactional
 public class UserService {
 	
 	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
-	private AdminitrationDao adminDao;
+	private GeneralDAO generalDao;
 	
 	@GET
 	@Path("/doctor/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Doctor getDoctor(@PathParam("id") long id){
-		return userDao.getDoctor(id);
+		return generalDao.find(Doctor.class, id);
 	}
 	
 	@GET
 	@Path("/patient/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Patient getPatient(@PathParam("id") long id){
-		return userDao.getPatient(id);
+		return generalDao.find(Patient.class, id);
 	}
 	
 	@POST
@@ -47,7 +45,7 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public long saveDoctor(Doctor doctor){
-		return userDao.saveDoctor(doctor).getId();
+		return generalDao.save(doctor).getId();
 	}
 	
 	
@@ -55,14 +53,14 @@ public class UserService {
 	@Path("/patient/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public long savePatient(Patient patient){
-		return userDao.savePatient(patient).getId();
+		return generalDao.save(patient).getId();
 	}
 	
 	@PUT
 	@Path("/patient/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public long updatePatient(Patient patient){
-		return userDao.savePatient(patient).getId();
+		return generalDao.merge(patient).getId();
 	}
 	
 	
@@ -72,7 +70,7 @@ public class UserService {
 	@Path("/medicalinfo/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean saveMedicalInfo(MedicalInfo medicalInfo){
-		userDao.saveMedicalInfo(medicalInfo);
+		generalDao.save(medicalInfo);
 		return true;
 	}
 	
@@ -80,7 +78,7 @@ public class UserService {
 	@Path("/medicalinfo/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean updateMedicalInfo(MedicalInfo medicalInfo){
-		userDao.updatedMedicalInfo(medicalInfo);
+		generalDao.merge(medicalInfo);
 		return true;
 	}
 	
@@ -89,6 +87,6 @@ public class UserService {
 	@Path("/medicalinfo/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public MedicalInfo getMedicalInfo(@PathParam("id") long id){
-		return userDao.getMedicalInfo(id);
+		return generalDao.find(MedicalInfo.class, id);
 	}
 }

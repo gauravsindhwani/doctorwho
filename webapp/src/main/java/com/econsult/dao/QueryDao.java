@@ -1,14 +1,8 @@
 package com.econsult.dao;
 
-import com.econsult.model.Post;
-import com.econsult.model.Query;
+import org.springframework.stereotype.Repository;
 
-public interface QueryDao {
-
-	public Query getQuery(Long Id);
-
-	public Query saveQuery(Query query);
-
-	public Post savePost(Post post);
-
+@Repository
+public class QueryDao extends AbstractBaseDao {
+	
 }

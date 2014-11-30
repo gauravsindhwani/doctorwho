@@ -11,15 +11,13 @@ import com.googlecode.genericdao.dao.jpa.GeneralDAOImpl;
 import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
 
 @Repository
-public abstract class AbstractDao extends GeneralDAOImpl implements GeneralDAO{
-
-	EntityManager entitymanager;
+public class EconsultGenericDaoImpl extends GeneralDAOImpl implements GeneralDAO{
 	
 	@Override
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
+		System.out.println("***************here");
             super.setEntityManager(entityManager);
-            this.entitymanager = entityManager;
     }
 
     @Override
