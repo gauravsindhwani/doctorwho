@@ -1,53 +1,38 @@
 package com.econsult.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "POST")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="postId")
-public class Post implements Audtiable {
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+public class Post extends AbstractAuditableAutoIncrementingEntity {
 	
 
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	Long postId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	public Post(Long postId) {
-		super();
-		this.postId = postId;
+		super(postId);
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CREATED_ON_DATE", insertable = false)
-	Date createdOnDate;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="UPDATED_ON_DATE")
-	Date updatedOnDate;
-	
-	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "QUERY_ID")
+	@JsonProperty(value = "queryId")
 	Query query;
 	
 	@Column(name = "TEXT", length = 65535)
@@ -56,6 +41,7 @@ public class Post implements Audtiable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
+	@JsonProperty(value = "userId")
 	DefaultUser user;
 	
 	@OneToOne
@@ -74,30 +60,10 @@ public class Post implements Audtiable {
 	public void setParent(Post parent) {
 		this.parent = parent;
 	}
-
-	
-	
 	public Post() {
 		super();
 	}
 
-	public Date getCreatedOnDate() {
-		return createdOnDate;
-	}
-
-	public void setCreatedOnDate(Date createdOnDate) {
-		this.createdOnDate = createdOnDate;
-	}
-
-	public Date getUpdatedOnDate() {
-		return updatedOnDate;
-	}
-
-	public void setUpdatedOnDate(Date updatedOnDate) {
-		this.updatedOnDate = updatedOnDate;
-	}
-
-	//@JsonIgnore
 	public Query getQuery() {
 		return query;
 	}
@@ -118,15 +84,15 @@ public class Post implements Audtiable {
 		return user;
 	}
 
+	@JsonProperty
+	public long getUserId(){
+		return user.getId();
+	}
+	
 	public void setUser(DefaultUser user) {
 		this.user = user;
+		this.postBy = user.getRole();
 	}
-
-	public Long getPostId() {
-		return postId;
-	}
-
-	
 
 	public Role getPostBy() {
 		return postBy;
@@ -136,5 +102,9 @@ public class Post implements Audtiable {
 		this.postBy = postBy;
 	}
 	
+	@JsonProperty
+	public long getQueryId(){
+		return query.getId();
+	}
 	
 }

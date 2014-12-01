@@ -1,7 +1,5 @@
 package com.econsult.service;
 
-import java.util.Date;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.econsult.model.Post;
 import com.econsult.model.Query;
 import com.econsult.model.lightweight.LWFirstQuery;
+import com.econsult.model.lightweight.LWPost;
 import com.googlecode.genericdao.dao.jpa.GeneralDAO;
 
 @Component
@@ -45,11 +44,19 @@ public class QueryService {
 		return generalDao.save(lightQuery.buildQuery()).getId();
 	}
 	
+	@GET
+	@Path("/post/{Id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Post getPost(@PathParam("Id") long id){
+		logger.trace("Getting query for ID {}", id);
+		return generalDao.find(Post.class, id);
+	}
+	
 	@POST
 	@Path("/post/")
-	public long createPost(Post post){
-		post.setUpdatedOnDate(new Date());
-		return generalDao.save(post).getPostId();
+	public long createPost(LWPost lwPost){
+		Post post = lwPost.buildPost();
+		return generalDao.save(post).getId();
 	}
 	
 }
