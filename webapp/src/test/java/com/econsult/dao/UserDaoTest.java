@@ -7,7 +7,7 @@ import com.econsult.model.MedicalInfo;
 public class UserDaoTest extends AbstractDaoTest {
 
 	public void testSaveMedicalInfo(){
-		System.out.println(userDao.saveMedicalInfo(getMedicalInfo()));
+	//	System.out.println(userDao.saveMedicalInfo(getMedicalInfo()));
 	}
 
 	private MedicalInfo getMedicalInfo() {

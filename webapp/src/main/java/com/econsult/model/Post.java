@@ -40,7 +40,7 @@ public class Post extends AbstractAuditableAutoIncrementingEntity {
 	String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID")
+	@JoinColumn(name = "USER_ID", foreignKey=@javax.persistence.ForeignKey(name = "POST_USER_FK"))
 	@JsonProperty(value = "userId")
 	DefaultUser user;
 	

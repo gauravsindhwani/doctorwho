@@ -63,6 +63,14 @@ public class AdministrationService {
 		return generalDao.find(ServicePlan.class, id);
 	}
 	
+	@GET
+	@Path("/plan/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
+	public ServicePlan getServicePlan(@PathParam("name") String name){
+		return adminDao.getServicePlanByName(name);
+	}
+	
 	@POST
 	@Path("/plan/")
 	public long createServicePlan(ServicePlan plan){
