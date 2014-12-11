@@ -9,10 +9,7 @@ public class AdministrationDaoTest extends AbstractDaoTest{
 	
 	
 
-	public void testCreateCorp() {
-		System.out.println(adminDao.saveCorporation(getCorporation()).getCorpId());
-		
-	}
+
 
 	private Corporation getCorporation() {
 		Corporation corp = new Corporation();
@@ -23,10 +20,7 @@ public class AdministrationDaoTest extends AbstractDaoTest{
 		return corp;
 	}
 	
-	public void testCreateSP() {
-		System.out.println(adminDao.saveServicePlan(getSP()));
-		
-	}
+	
 	
 	private ServicePlan getSP(){
 		ServicePlan sp = new ServicePlan();
@@ -37,10 +31,7 @@ public class AdministrationDaoTest extends AbstractDaoTest{
 		return sp;
 	}
 	
-	public void testCreateAccount() {
-		System.out.println(adminDao.saveAccount(getAccount()));
-		
-	}
+	
 	
 	private Account getAccount(){
 		Account account = new Account();
@@ -50,10 +41,7 @@ public class AdministrationDaoTest extends AbstractDaoTest{
 	}
 	
 
-	public void testCreateCorpAccount() {
-		System.out.println(adminDao.saveCorpAccount(getCorpAccount()));
-		
-	}
+	
 	
 	private CorpAccount getCorpAccount(){
 		CorpAccount ca = new CorpAccount();

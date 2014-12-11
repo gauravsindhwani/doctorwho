@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "USER")
@@ -102,6 +104,10 @@ public class DefaultUser extends AbstractAuditableAutoIncrementingEntity impleme
 		this.role = role;
 	}
 	
+	@JsonProperty
+	public void setRole(String role){
+		this.role = Role.Roles.valueOf(role).getRole();
+	}
 	public ContactInfo getContactInfo() {
 		return contactInfo;
 	}

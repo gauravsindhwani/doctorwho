@@ -14,6 +14,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -26,12 +27,14 @@ public class Query extends AbstractAuditableAutoIncrementingEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOCTOR_ID")
+	@JsonProperty(value= "doctorId")
 	Doctor doctor;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PATIENT_ID")
+	@JsonProperty(value= "patientId")
 	Patient patient;
 
 	@OneToMany(fetch = FetchType.EAGER)
@@ -43,6 +46,9 @@ public class Query extends AbstractAuditableAutoIncrementingEntity {
 		super();
 	}
 
+	public Query(long id){
+		super(id);
+	}
 	
 	public Doctor getDoctor() {
 		return doctor;
@@ -56,6 +62,11 @@ public class Query extends AbstractAuditableAutoIncrementingEntity {
 		return patient;
 	}
 
+	@JsonProperty
+	public long getPatientId() {
+		return patient.getId();
+	}
+	
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
@@ -73,6 +84,10 @@ public class Query extends AbstractAuditableAutoIncrementingEntity {
 		posts.add(post);
 	}
 	
+	@JsonProperty
+	public Long getDoctorId(){
+		return doctor != null ? doctor.getId() : null;
+	}
 
 	
 }

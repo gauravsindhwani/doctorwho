@@ -38,7 +38,7 @@ public class Account extends AbstractAuditableAutoIncrementingEntity{
 	@JoinColumn(name = "ACCOUNT_ID")
 	CorpAccount corpAccount;
 	
-	@Column(name = "VERIFIED", columnDefinition= "default '0'")
+	@Column(name = "VERIFIED", columnDefinition= "boolean default '0'")
 	boolean verified;
 	
 	public Account(long id) {

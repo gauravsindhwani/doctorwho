@@ -16,7 +16,6 @@ public class EconsultGenericDaoImpl extends GeneralDAOImpl implements GeneralDAO
 	@Override
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
-		System.out.println("***************here");
             super.setEntityManager(entityManager);
     }
 

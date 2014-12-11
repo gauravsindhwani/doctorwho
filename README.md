@@ -4,6 +4,7 @@
 
 1. Install Mysql
 2. DDL script location <projectlocation>/econsult/DataModel/econsultModel.sql
+3. Setup basic data scriptLocation: <projectlocation>/econsult/DataModel/seedDataSetup.sql
 
 ## Project setup
 
@@ -151,42 +152,24 @@ dobToDisplay: "2013-02-11"
 }
 
 ```
-#Following Api's are not tested in latest version
+
 ### Create Doctor
 * Service end point:**http://localhost:8080/econsult/u/doctor/**
 * content-type:**Content-Type: application/json**
 * HTTP Method:**POST**
 * Payload 
 ```
-
 {
-"firstName": "Doc",
-"lastName": "d",
-"password": "c",
-"role": {
-"roleName": "DOCTOR"
+  "firstName" : "doc1",
+  "contactInfo" : {
+    "email" : "doc1@gmail.com"
+  }
 }
 
 ```
-
-
-### Create Patient
-* Service end point:**http://localhost:8080/econsult/u/patient/**
-* content-type:**Content-Type: application/json**
-* HTTP Method:**POST**
-* Payload 
-```
-
-{
-"firstName": "Pat",
-"lastName": "d",
-"password": "c",
-"role": {
-"roleName": "PATIENT"
-}
-
-```
-
+### Get Doctor
+* Service end point:**http://localhost:8080/econsult/u/doctor/{ID}**
+* HTTP Method:**GET**
 
 ### Create Query
 * Service end point:**http://localhost:8080/econsult/q/query/**
@@ -194,43 +177,35 @@ dobToDisplay: "2013-02-11"
 * HTTP Method:**POST**
 * Payload 
 ```
-
 {
-text:"hi doc wassup",
-patient{
-  id: "4"
+"text":"hi doc wassup",
+"patientId": "4"
 }
-}
+
 
 ```
+### Get Query
+* Service end point:**http://localhost:8080/econsult/q/query/{ID}**
+* HTTP Method:**GET**
 
 ### Create Post
 * Service end point:**http://localhost:8080/econsult/q/post/**
 * content-type:**Content-Type: application/json**
-* HTTP Method: **POST **
+* HTTP Method:**POST**
 * Payload 
 ```
-
 {
-"text": "I am good",
-"user": {
-  "id": 1
-},
-
-"query":{
-  "queryId":"1"
-},
-
-"postBy":{
-"roleName": "DOCTOR"
-},
-"parent":{
-"id":1
-}
-}
+  "queryId": 3,
+  "text" : "doc here i m good",
+   "user":{
+     "id":13,
+     "role":"DOCTOR"
+   }
+ }
 
 ```
 
-### Get Query
-* Service end point: **http://localhost:8080/econsult/q/query/<id> **
-* HTTP Method: **GET**
+### Get POST
+* Service end point:**http://localhost:8080/econsult/q/post/{ID}**
+* HTTP Method:**GET**
+
