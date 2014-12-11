@@ -148,6 +148,11 @@
 			<artifactId>search-jpa-hibernate</artifactId>
 			<version>${genericdao.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlets</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
 
 	</dependencies>
 	<build>

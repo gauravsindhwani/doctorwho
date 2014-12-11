@@ -1,11 +1,6 @@
 package com.econsult.service;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -25,8 +20,10 @@ import com.econsult.model.lightweight.LWCorporation;
 import com.econsult.model.lightweight.LWFirstUser;
 import com.googlecode.genericdao.dao.jpa.GeneralDAO;
 
+import java.util.List;
+
 @Component
-@Path("econsult/admin/")
+@Path("/admin/")
 @Transactional
 public class AdministrationService {
 	
@@ -45,6 +42,22 @@ public class AdministrationService {
 		logger.trace("Getting corporation for ID {}", id);
 		return generalDao.find(Corporation.class, id);
 	}
+
+    @DELETE
+    @Path("/corp/{Id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean deleteCorporation(@PathParam("Id") long id){
+        logger.trace("Deleting corporation for ID {}", id);
+        return generalDao.remove(generalDao.find(Corporation.class, id));
+    }
+
+    @GET
+    @Path("/corp/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Corporation> getCorporations(){
+        logger.trace("Getting all corporations");
+        return generalDao.findAll(Corporation.class);
+    }
 	
 	
 	@GET
@@ -54,8 +67,17 @@ public class AdministrationService {
 		logger.trace("Getting account for ID {}", id);
 		return generalDao.find(Account.class, id);
 	}
-	
-	@GET
+
+    @GET
+    @Path("/plan/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ServicePlan> getServicePlans(){
+        logger.trace("Getting all service plans");
+        return generalDao.findAll(ServicePlan.class);
+    }
+
+
+    @GET
 	@Path("/plan/{Id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ServicePlan getServicePlan(@PathParam("Id") long id){
@@ -74,8 +96,17 @@ public class AdministrationService {
 	public long createCorporation(LWCorporation inflighCorp){
 		return generalDao.save(inflighCorp.buildCorporation()).getCorpId();
 	}
-	
-	@POST
+
+    @POST
+    @Path("/corp/{Id}")
+    public long updateCorporation(@PathParam("Id") long id, LWCorporation inflighCorp){
+        logger.debug("updateCorporation id=" + id);
+        Corporation corp = generalDao.find(Corporation.class, id);
+        return generalDao.save(inflighCorp.buildCorporation(corp)).getCorpId();
+    }
+
+
+    @POST
 	@Path("/account/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean registerNewUserFromCorpMail(LWFirstUser user){

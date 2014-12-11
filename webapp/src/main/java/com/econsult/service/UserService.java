@@ -19,7 +19,7 @@ import com.econsult.model.Patient;
 import com.googlecode.genericdao.dao.jpa.GeneralDAO;
 
 @Component
-@Path("/econsult/u/")
+@Path("/u/")
 @Transactional
 public class UserService {
 	

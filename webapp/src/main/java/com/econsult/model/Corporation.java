@@ -103,7 +103,7 @@ public class Corporation extends AbstractAuditableAutoIncrementingEntity{
 		this.updatedOnDate = updatedOnDate;
 	}
 
-	@JsonIgnore	
+    @JsonIgnore
 	public long getCorpId() {
 		return id;
 	}

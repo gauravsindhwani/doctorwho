@@ -21,7 +21,7 @@ import com.econsult.model.lightweight.LWFirstQuery;
 import com.googlecode.genericdao.dao.jpa.GeneralDAO;
 
 @Component
-@Path("econsult/q/")
+@Path("/q/")
 @Transactional
 public class QueryService {
 	private final static Logger logger = LoggerFactory.getLogger(QueryService.class); 
